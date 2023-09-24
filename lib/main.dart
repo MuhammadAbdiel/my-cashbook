@@ -1,6 +1,7 @@
 //kode utama Aplikasi tampilan awal
 import 'package:flutter/material.dart';
 import 'package:sqlitedatabases/pages/login.dart';
+// import 'package:sqlitedatabases/ui/home.dart';
 
 //package letak folder Anda
 void main() => runApp(const MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       //judul
       title: 'Tambahkan Daftar',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.green,
       ),
       debugShowCheckedModeBanner: false,
       home: const Login(),

@@ -21,8 +21,25 @@ class _LoginState extends State<Login> {
 
   Future login() async {
     var db = DBHelper();
-    var username = usernameInput.text;
-    var password = passwordInput.text;
+    var res = await db.getLogin(
+      usernameInput.text,
+      passwordInput.text,
+    );
+
+    if (res != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Home(),
+        ),
+      );
+    } else {
+      _scaffoldKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text('Username atau Password salah!'),
+        ),
+      );
+    }
   }
 
   void _setLogin() {
@@ -137,7 +154,7 @@ class _LoginState extends State<Login> {
                           ),
                           focusColor: Colors.green,
                         ),
-                        obscureText: true,
+                        // obscureText: true,
                       ),
                       const SizedBox(
                         height: 25,

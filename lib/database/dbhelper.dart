@@ -25,7 +25,7 @@ class DBHelper {
 
   setDB() async {
     io.Directory directory = await getApplicationDocumentsDirectory();
-    String path = join(directory.path, 'my-cashbook.db');
+    String path = join(directory.path, 'my-cashbook-1.db');
     var db = await openDatabase(path, version: 1, onCreate: _onCreate);
     return db;
   }
@@ -40,20 +40,40 @@ class DBHelper {
     );
 
     await db.execute(
-      "INSERT INTO user (name, username, password) VALUES ('Muhammad Abdiel Firjatullah', 'muhammadabdiel', 'password')",
+      "INSERT INTO user (name, username, password) VALUES ('Muhammad Abdiel Firjatullah', 'muhammadabdiel', '13122001')",
     );
     print('DB Created');
   }
 
-  Future<dynamic> getLogin(String username, String password) async {
-    var dbClient = await db;
-    var res = await dbClient!.rawQuery(
-      "SELECT * FROM user WHERE username = '$username' AND password = '$password'",
-    );
-    print(res);
-    if (res.isNotEmpty) {
-      return User.map(res.first);
+  // Future<dynamic> getLogin(String username, String password) async {
+  //   var dbClient = await db;
+  //   var res = await dbClient!.rawQuery(
+  //     "SELECT * FROM user WHERE username = '$username' AND password = '$password'",
+  //   );
+  //   print(res);
+  //   if (res.isNotEmpty) {
+  //     return User.map(res.first);
+  //   }
+  //   return null;
+  // }
+
+  Future<User?> getLogin(String username, String password) async {
+    final dbClient = await db;
+
+    try {
+      final List<Map<String, dynamic>> res = await dbClient!.query(
+        'user',
+        where: 'username = ? AND password = ?',
+        whereArgs: [username, password],
+      );
+
+      if (res.isNotEmpty) {
+        return User.map(res.first);
+      }
+    } catch (e) {
+      print('Error while fetching user data: $e');
     }
+
     return null;
   }
 

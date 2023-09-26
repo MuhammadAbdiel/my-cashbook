@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:sqlitedatabases/pages/cashflow.dart';
+import 'package:sqlitedatabases/pages/cashflow_data.dart';
 import 'package:sqlitedatabases/pages/pemasukan.dart';
 import 'package:sqlitedatabases/pages/pengaturan.dart';
 import 'package:sqlitedatabases/pages/pengeluaran.dart';
+import 'package:sqlitedatabases/database/dbhelper.dart';
+import 'package:intl/intl.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  var db = DBHelper();
+  var formatCurrency = NumberFormat.currency(locale: 'id', symbol: 'Rp. ');
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +26,11 @@ class Home extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(20),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Center(
                     child: Text(
-                      'Catatan Bulan Ini',
+                      'Catatan Cashflow',
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.w600,
@@ -30,23 +41,63 @@ class Home extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
-                    'Pengeluaran : Rp. 500.000',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'Poppins',
-                      color: Colors.red,
-                    ),
+                  FutureBuilder(
+                    future: db.getTotalNominalByType('Pemasukan'),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        print(snapshot.error);
+                      }
+
+                      var data = snapshot.data;
+
+                      return snapshot.hasData
+                          ? Text(
+                              "Pemasukan   : " + formatCurrency.format(data),
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Poppins',
+                                color: Colors.green,
+                              ),
+                            )
+                          : const Center(
+                              child: Text(
+                                'Rp. 0',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                ),
+                              ),
+                            );
+                    },
                   ),
-                  const Text(
-                    'Pemasukan : Rp. 1.500.000',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'Poppins',
-                      color: Colors.green,
-                    ),
+                  FutureBuilder(
+                    future: db.getTotalNominalByType('Pengeluaran'),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        print(snapshot.error);
+                      }
+
+                      var data = snapshot.data;
+
+                      return snapshot.hasData
+                          ? Text(
+                              "Pengeluaran : " + formatCurrency.format(data),
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Poppins',
+                                color: Colors.red,
+                              ),
+                            )
+                          : const Center(
+                              child: Text(
+                                'Rp. 0',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                ),
+                              ),
+                            );
+                    },
                   ),
                   const SizedBox(
                     height: 50,
@@ -152,7 +203,7 @@ class Home extends StatelessWidget {
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => const Cashflow(),
+                                  builder: (context) => const CashflowData(),
                                 ),
                               );
                             },

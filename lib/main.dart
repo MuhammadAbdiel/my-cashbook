@@ -1,7 +1,6 @@
 //kode utama Aplikasi tampilan awal
 import 'package:flutter/material.dart';
 import 'package:sqlitedatabases/pages/login.dart';
-// import 'package:sqlitedatabases/ui/home.dart';
 
 //package letak folder Anda
 void main() => runApp(const MyApp());

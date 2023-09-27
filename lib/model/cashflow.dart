@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_this
+
 class Cashflow {
   late int id;
   late String _tanggal;

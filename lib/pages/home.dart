@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:sqlitedatabases/pages/cashflow_data.dart';
 import 'package:sqlitedatabases/pages/pemasukan.dart';
@@ -22,6 +24,32 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Container(
+        padding: const EdgeInsets.all(20),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => const Login(),
+              ),
+            );
+          },
+          child: const Text('Logout'),
+          style: ElevatedButton.styleFrom(
+            primary: Colors.red,
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
+            ),
+            textStyle: const TextStyle(
+              fontSize: 20,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w500,
+            ),
+            minimumSize: const Size.fromHeight(50),
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Flexible(
@@ -102,7 +130,27 @@ class _HomeState extends State<Home> {
                     },
                   ),
                   const SizedBox(
-                    height: 50,
+                    height: 20,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 2,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Image(
+                      image: Image.asset('assets/icons/graph.png').image,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -121,9 +169,14 @@ class _HomeState extends State<Home> {
                               padding: const EdgeInsets.all(20),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                  color: Colors.green,
-                                ),
+                                color: Colors.white,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 2,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
                               ),
                               child: Column(
                                 children: const [
@@ -163,9 +216,14 @@ class _HomeState extends State<Home> {
                               padding: const EdgeInsets.all(20),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                  color: Colors.green,
-                                ),
+                                color: Colors.white,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 2,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
                               ),
                               child: Column(
                                 children: const [
@@ -213,9 +271,14 @@ class _HomeState extends State<Home> {
                               padding: const EdgeInsets.all(20),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                  color: Colors.green,
-                                ),
+                                color: Colors.white,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 2,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
                               ),
                               child: Column(
                                 children: const [
@@ -256,9 +319,14 @@ class _HomeState extends State<Home> {
                               padding: const EdgeInsets.all(20),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                  color: Colors.green,
-                                ),
+                                color: Colors.white,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 2,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
                               ),
                               child: Column(
                                 children: const [
@@ -288,32 +356,7 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                   const SizedBox(
-                    height: 50,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(15),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => const Login(),
-                          ),
-                        );
-                      },
-                      child: const Text('Logout'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.red,
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                        ),
-                        textStyle: const TextStyle(
-                          fontSize: 20,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
-                        ),
-                        minimumSize: const Size.fromHeight(50),
-                      ),
-                    ),
+                    height: 100,
                   ),
                 ],
               ),

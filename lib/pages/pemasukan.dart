@@ -1,4 +1,4 @@
-// ignore_for_file: no_logic_in_create_state
+// ignore_for_file: no_logic_in_create_state, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -54,6 +54,75 @@ class _PemasukanState extends State<Pemasukan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Container(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                dateInput.clear();
+                nominalInput.clear();
+                keteranganInput.clear();
+              },
+              child: const Text('Reset'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.orange,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                ),
+                textStyle: const TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+                minimumSize: const Size.fromHeight(50),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: _saveData,
+              child: const Text('Simpan'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blue,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                ),
+                textStyle: const TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+                minimumSize: const Size.fromHeight(50),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Kembali'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                ),
+                textStyle: const TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
+                minimumSize: const Size.fromHeight(50),
+              ),
+            ),
+          ],
+        ),
+      ),
       key: _scaffoldKey,
       body: SingleChildScrollView(
         child: SafeArea(
@@ -193,69 +262,6 @@ class _PemasukanState extends State<Pemasukan> {
                           color: Colors.green,
                         ),
                         focusColor: Colors.green,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        dateInput.clear();
-                        nominalInput.clear();
-                        keteranganInput.clear();
-                      },
-                      child: const Text('Reset'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.orange,
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                        ),
-                        textStyle: const TextStyle(
-                          fontSize: 20,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
-                        ),
-                        minimumSize: const Size.fromHeight(50),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ElevatedButton(
-                      onPressed: _saveData,
-                      child: const Text('Simpan'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                        ),
-                        textStyle: const TextStyle(
-                          fontSize: 20,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
-                        ),
-                        minimumSize: const Size.fromHeight(50),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Kembali'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.red,
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                        ),
-                        textStyle: const TextStyle(
-                          fontSize: 20,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
-                        ),
-                        minimumSize: const Size.fromHeight(50),
                       ),
                     ),
                   ],

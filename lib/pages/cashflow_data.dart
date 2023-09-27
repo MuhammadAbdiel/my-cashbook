@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:sqlitedatabases/model/cashflow.dart';
 import 'package:sqlitedatabases/database/dbhelper.dart';
@@ -18,9 +20,7 @@ class _CashflowDataState extends State<CashflowData> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Container(
-        margin: const EdgeInsets.symmetric(
-          horizontal: 20,
-        ),
+        padding: const EdgeInsets.all(20),
         child: ElevatedButton(
           onPressed: () {
             Navigator.pop(context);

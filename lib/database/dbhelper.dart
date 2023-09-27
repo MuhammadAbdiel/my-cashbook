@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -5,7 +7,6 @@ import 'dart:async';
 import 'dart:io' as io;
 
 import '../model/cashflow.dart';
-import '../model/user.dart';
 
 class DBHelper {
   static final DBHelper _instance = DBHelper.internal();
@@ -25,7 +26,7 @@ class DBHelper {
 
   setDB() async {
     io.Directory directory = await getApplicationDocumentsDirectory();
-    String path = join(directory.path, 'my-cashbook-6.db');
+    String path = join(directory.path, 'my-cashbook-7.db');
     var db = await openDatabase(path, version: 1, onCreate: _onCreate);
     return db;
   }
@@ -53,7 +54,6 @@ class DBHelper {
     return res;
   }
 
-  // get user password
   Future<String> getPassword() async {
     var dbClient = await db;
     List<Map> list = await dbClient!.rawQuery(

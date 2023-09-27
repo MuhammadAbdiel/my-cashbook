@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:sqlitedatabases/pages/login.dart';
 
-//package letak folder Anda
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -11,8 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //judul
-      title: 'Tambahkan Daftar',
+      title: 'Cashbook',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),

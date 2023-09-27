@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:sqlitedatabases/database/dbhelper.dart';
@@ -18,15 +18,26 @@ class _LoginState extends State<Login> {
   TextEditingController passwordInput = TextEditingController();
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  var db = DBHelper();
 
-  Future login() async {
-    var db = DBHelper();
+  Future initDB() async {
+    await db.setDB();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    initDB();
+  }
+
+  login() async {
     var res = await db.getLogin(
-      usernameInput.text,
-      passwordInput.text,
+      usernameInput.text.toString(),
+      passwordInput.text.toString(),
     );
 
-    if (res != null) {
+    if (res.isNotEmpty) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -46,14 +57,6 @@ class _LoginState extends State<Login> {
     if (formKey.currentState!.validate()) {
       login();
     }
-  }
-
-  @override
-  void dispose() {
-    usernameInput.dispose();
-    passwordInput.dispose();
-
-    super.dispose();
   }
 
   @override
@@ -93,6 +96,7 @@ class _LoginState extends State<Login> {
                       ),
                       // Form Input
                       TextFormField(
+                        controller: usernameInput,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Username wajib diisi!';
@@ -126,6 +130,7 @@ class _LoginState extends State<Login> {
                         height: 10,
                       ),
                       TextFormField(
+                        controller: passwordInput,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Password wajib diisi!';
@@ -154,13 +159,21 @@ class _LoginState extends State<Login> {
                           ),
                           focusColor: Colors.green,
                         ),
-                        // obscureText: true,
+                        obscureText: true,
                       ),
                       const SizedBox(
                         height: 25,
                       ),
                       ElevatedButton(
                         onPressed: _setLogin,
+                        // onPressed: () {
+                        //   Navigator.pushReplacement(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => const Home(),
+                        //     ),
+                        //   );
+                        // },
                         child: const Text('Login'),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.green,

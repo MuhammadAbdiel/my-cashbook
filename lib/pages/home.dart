@@ -6,6 +6,8 @@ import 'package:sqlitedatabases/pages/pengeluaran.dart';
 import 'package:sqlitedatabases/database/dbhelper.dart';
 import 'package:intl/intl.dart';
 
+import 'login.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -292,7 +294,11 @@ class _HomeState extends State<Home> {
                     padding: const EdgeInsets.all(15),
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => const Login(),
+                          ),
+                        );
                       },
                       child: const Text('Logout'),
                       style: ElevatedButton.styleFrom(

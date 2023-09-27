@@ -53,6 +53,24 @@ class DBHelper {
     return res;
   }
 
+  // get user password
+  Future<String> getPassword() async {
+    var dbClient = await db;
+    List<Map> list = await dbClient!.rawQuery(
+      "SELECT password FROM user WHERE username = 'muhammadabdiel'",
+    );
+    String password = list[0]['password'].toString();
+    return password;
+  }
+
+  Future<bool> updatePassword(String password) async {
+    var dbClient = await db;
+    int res = await dbClient!.rawUpdate(
+      "UPDATE user SET password = '$password' WHERE username = 'muhammadabdiel'",
+    );
+    return res > 0 ? true : false;
+  }
+
   Future<int> saveCashflow(Cashflow cashflow) async {
     var dbClient = await db;
     int res = await dbClient!.insert('cashflow', cashflow.toMap());

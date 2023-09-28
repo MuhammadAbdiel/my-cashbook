@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sqlitedatabases/model/cashflow.dart';
+import 'package:intl/intl.dart';
 
 class CashflowPage extends StatefulWidget {
   final List<Cashflow> cashflowData;
@@ -11,6 +12,8 @@ class CashflowPage extends StatefulWidget {
 }
 
 class _CashflowPageState extends State<CashflowPage> {
+  var formatCurrency = NumberFormat.currency(locale: 'id', symbol: 'Rp. ');
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -43,7 +46,9 @@ class _CashflowPageState extends State<CashflowPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Rp. ${widget.cashflowData[index].nominal.toString()}',
+                        formatCurrency.format(
+                          widget.cashflowData[index].nominal,
+                        ),
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
